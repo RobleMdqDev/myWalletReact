@@ -1,0 +1,83 @@
+.login {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: darkslategrey;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .vibra {
+        animation: vibrar normal 0.2s linear;
+    }
+    .agrandar {
+        animation: agranda normal 0.2s linear;
+    }
+}
+
+@keyframes vibrar {
+    0% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(5deg);
+    }
+    50% {
+        transform: rotate(-5deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes agranda {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.login-dark form {
+    width: 400px;
+    background-color: #1e2833;
+    padding: 40px;
+    border-radius: 4px;
+    color: #fff;
+    box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.2);
+}
+
+form .form-control {
+    background: none;
+    border: none;
+    border-bottom: 1px solid #376497;
+    border-radius: 0;
+    box-shadow: none;
+    outline: none;
+    color: inherit;
+}
+
+.login-dark form .btn-primary {
+    background: #214a80;
+    border: none;
+    border-radius: 4px;
+    padding: 11px;
+    box-shadow: none;
+    margin-top: 26px;
+    text-shadow: none;
+    outline: none;
+}
+
+.login-dark form .btn-primary:hover,
+.login-dark form .btn-primary:active {
+    background: #214a80;
+    outline: none;
+}
+
+.login-dark form .btn-primary:active {
+    transform: translateY(1px);
+}

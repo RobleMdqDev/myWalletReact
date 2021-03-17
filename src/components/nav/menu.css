@@ -1,0 +1,18 @@
+.links {
+    color: white;
+    font-size: 1.1rem;
+    margin: 0 1rem;
+    padding-left: 1rem;
+    border-left: 2px solid whitesmoke;
+    border-radius: 5px;
+}
+
+a.links:hover {
+    text-decoration: none;
+    color: rgb(209, 206, 206);
+}
+
+#collasible-nav-dropdown {
+    color: white;
+    font-size: 1.2rem;
+}
