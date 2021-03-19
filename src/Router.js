@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import Header from './components/header/Header';
@@ -22,10 +22,9 @@ export default function Router (){
 				<Container fluid className="mt-3">
 					<Switch>
 						
-						<Route exact path="/" component={Home} />
-						<Route exact path="/home" component={Home} />
-						<Route exact path="/categories" component={Categories} />
-						<Route exact path="/accounting" component={Accounting} />
+						<Route exact path="/" component={Home} />						
+						<Route  path="/categories" component={Categories} />
+						<Route  path="/accounting" component={Accounting} />
 						<Route component={Error} />
 
 					</Switch>

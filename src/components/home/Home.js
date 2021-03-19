@@ -4,6 +4,7 @@ import axios from 'axios';
 import './home.css';
 
 import TableList from '../table/TableList';
+import Swal from 'sweetalert2';
 
 
  
@@ -40,7 +41,11 @@ export default function Home (props) {
 					  setTableList(res.data.response)
 					})
 					.catch((error) => {
-					  console.error(error)
+						Swal.fire(
+							'Error!',
+							error.response.data.message,           
+							'error'            
+						  )
 					});
 				}
 			getAccounting ();

@@ -1,73 +1,57 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
-import { connect } from 'react-redux';
-import { Form, InputGroup, Col, FormControl, Button, Table } from 'react-bootstrap';
 
 
-function Categories (props) {
+import TableListCategories from './TableListCategories';
+import NewCategory from './NewCategory';
+import Swal from 'sweetalert2';
 
+
+export default function Categories (props) {
+
+	const token = localStorage.getItem("ACCESS_TOKEN");
 	
+  
+  const [reload, setReload] = useState(0)
+				
+  const [tableList, setTableList] = useState();
+
+  const handleReloadCategories = ()=>{
+    setReload(reload+1);
+  } 
+       
+
+    useEffect(() => {
+        async function getTableList () { 
+            
+            await axios.get(`//localhost:8000/category` , {
+                headers: {
+                'Authorization': token
+                }
+            }).then((res) => {
+                setTableList(res.data.response)
+            }).catch((error) => {
+              Swal.fire(
+                'Error!',
+                error.response.data.message,           
+                'error'            
+              )
+            });
+
+        };
+        
+        getTableList ();
+
+    },[reload]);
+
+
 	return (
     <>
       <h1>CATEGORIES</h1>
 
-      <Form>
-        <Form.Row className='align-items-center justify-content-center'>
-          <Col xs='auto'>
-            <h4> Create New Category</h4>
-          </Col>
-          <Col xs='auto'>
-            <Form.Label htmlFor='inlineFormInputGroup' srOnly>
-              
-            </Form.Label>
-            <InputGroup className='mb-2'>
-              <InputGroup.Prepend>
-                <InputGroup.Text><strong>></strong></InputGroup.Text>
-              </InputGroup.Prepend>
-              <FormControl id='inlineFormInputGroup' placeholder='Categories' />
-            </InputGroup>
-          </Col>
-          <Col xs='auto'>
-            <Button type='submit' className='mb-2'>
-              +
-            </Button>
-          </Col>
-        </Form.Row>
-      </Form>
+      <NewCategory handleReloadCategories={handleReloadCategories} />
 	  
-      <Table striped bordered hover variant='dark'>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Category Name</th>            
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>Comida</td>
-            <td>
-              <Button block variant='danger'>
-                Delete
-              </Button>
-            </td>
-            <td>
-              <Button block variant='info'>
-                Edit
-              </Button>
-            </td>
-          </tr>
-        </tbody>
-      </Table>
+      <TableListCategories tableList={tableList} handleReloadCategories={handleReloadCategories} />
     </>
   );
 }
-
-const mapStateToProps = (state) =>{
-	return {token: state}
-}
-
-export default connect(mapStateToProps, null)(Categories);
-

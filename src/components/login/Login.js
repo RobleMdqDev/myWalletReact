@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { rutaAPI } from '../../config/Config'
-import { connect } from 'react-redux';
+import { rutaAPI } from '../../config/Config';
+
 import LoginForm from './LoginForm';
 import SignForm from './SignForm';
 import "./login.css";

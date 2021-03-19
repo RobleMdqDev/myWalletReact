@@ -1,14 +1,14 @@
 
 import { useEffect, useState } from "react";
-import { Pagination, Table } from "react-bootstrap";
-import RowTableList from "./RowTableList";
+import { Table } from "react-bootstrap";
+import RowTableListCategories from "./RowTableListCategories";
 
-const TableList = ({tableList, handleReloadHome})=>{
+const TableListCategories = ({tableList, handleReloadCategories})=>{
   	
   const [tableListHtml, setTableListHtml] = useState();   
    
   function handleReload(){
-    handleReloadHome();
+    handleReloadCategories();
     
   }
 
@@ -17,7 +17,7 @@ const TableList = ({tableList, handleReloadHome})=>{
     if(tableList !== undefined){
       const tableListAux = tableList.map((list, index) => (
         <tr key={index}>
-          <RowTableList key={list.id} list={list} handleReload={handleReload}/>						
+          <RowTableListCategories key={list.id} list={list} handleReload={handleReload}/>						
         </tr>
       ));
       setTableListHtml(tableListAux);
@@ -29,10 +29,8 @@ const TableList = ({tableList, handleReloadHome})=>{
       <Table responsive="md" striped bordered hover variant="dark">
       <thead>
         <tr>
-          <th>Date</th>
-          <th>Concept</th>
-          <th>Amount</th>
-          <th>Category</th>
+          <th>ID</th>
+          <th>Category Name</th>          
           <th></th>
           <th></th>											
         </tr>
@@ -40,12 +38,9 @@ const TableList = ({tableList, handleReloadHome})=>{
       <tbody>
         {tableListHtml}									
       </tbody>
-     
-    </Table>	
-     
-     
+    </Table>		
     )
 
 }
 
-export default TableList
+export default TableListCategories

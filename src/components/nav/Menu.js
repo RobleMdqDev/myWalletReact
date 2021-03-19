@@ -35,7 +35,7 @@ export default function Menu () {
 				<Navbar.Collapse id="responsive-navbar-nav">
 					<Nav className="mr-auto" >
 						
-							<Link className="links" to ={"/home"}>					
+							<Link className="links" to ={"/"}>					
 								Home						   
 							</Link>
 						<br/>
@@ -51,9 +51,7 @@ export default function Menu () {
 						<br/>			
 					</Nav>	
 					<NavDropdown  title={userName} id="collasible-nav-dropdown">
-							<NavDropdown.Item>INFO</NavDropdown.Item>								
-							<NavDropdown.Divider />
-							<NavDropdown.Item onClick={salirLog}>Salir</NavDropdown.Item>
+						<NavDropdown.Item onClick={salirLog}>Exit</NavDropdown.Item>
 					</NavDropdown>				
 				</Navbar.Collapse>
 			</Navbar>

@@ -3,27 +3,20 @@ import React, { useState} from 'react'
 import { Button } from 'react-bootstrap'
 import Swal from 'sweetalert2';
 
-import SelectCategory from '../selectcategory/SelectCategory';
-
-const RowTableList = ({list, handleReload})=>{
+const RowTableListCategories = ({list, handleReload})=>{
  
 
   const token = localStorage.getItem("ACCESS_TOKEN");
   
   const [field, setField] = useState({
-    date: list.date,
-    concept: list.concept,
-    amount: list.amount,
-    category: list.name,
-    type: list.type,
-    category_id: list.category_id,
-    user_id: list.user_id
+    id: list.id,
+    name: list.name    
   })
 
   const handleDelete = (e) => {
     e.preventDefault()		   
     
-      async function deleteAccounting () {
+      async function deleteCategories () {
         Swal.fire({
           title: 'Are you sure?',
           text: "You won't be able to revert this!",
@@ -36,7 +29,7 @@ const RowTableList = ({list, handleReload})=>{
           if (result.isConfirmed) {
             axios({
               method: 'delete',
-              url: `//localhost:8000/accounting/` + e.target.value,
+              url: `//localhost:8000/category/` + e.target.value,
               headers: {'Authorization': token},
             }).then((res)=>{
               Swal.fire(
@@ -52,12 +45,13 @@ const RowTableList = ({list, handleReload})=>{
                 'error'            
               )
               								 
-            });
+            });                       
+            
             handleReload();
           }
           })					
       }
-    deleteAccounting ();
+    deleteCategories ();
   }
 
   const handleEditChange = (e) => {
@@ -74,7 +68,7 @@ const RowTableList = ({list, handleReload})=>{
 		async function putAccounting() { 
 				await axios({
 				    method: 'put',
-				    url: `//localhost:8000/accounting/`+list.id,
+				    url: `//localhost:8000/category/`+list.id,
 				    data: field,
 				    headers: {'Authorization': token}
 				    })
@@ -84,14 +78,17 @@ const RowTableList = ({list, handleReload})=>{
             'Your file has been edited.',
             'success'
             )
+            
             handleReload();
 				})
 				.catch((error) => {
+				  
           Swal.fire(
             'Error!',
             error.response.data.message,           
-            'error'            
-          )
+            'error'
+            
+            )
 				});
 		}
 		putAccounting ();		
@@ -99,11 +96,9 @@ const RowTableList = ({list, handleReload})=>{
     
 
     return (
-        <>
-          <td id="dateList"> <input type="date" name="date" onChange={handleEditChange} value={(field.date).slice(-24, 10)} /></td>
-          <td id="conceptList"><input type="text" name="concept" onChange={handleEditChange} value={field.concept}/></td>
-          <td id="amountList"><input type="text" name="amount" onChange={handleEditChange} value={field.amount}/></td>
-          <td id="categorList"><SelectCategory handleEditChange={handleEditChange} field={field} token={token} /></td>    						
+        <>         
+          <td id="conceptList"><input type="text" name="id" onChange={handleEditChange} value={field.id} disabled/> </td>          
+          <td id="categorList"><input type="text" name="name" onChange={handleEditChange} value={field.name}/></td>    						
           
           <td><Button block variant="danger" onClick={(e)=>handleDelete(e)} value={list.id}>Delete</Button></td>
           <td><Button block variant="info"  onClick={(e)=>handleEdit(e)} value ={list.id}>Edit</Button></td>
@@ -112,4 +107,4 @@ const RowTableList = ({list, handleReload})=>{
 
 }
 
-export default RowTableList
+export default RowTableListCategories
