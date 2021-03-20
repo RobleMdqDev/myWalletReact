@@ -32,15 +32,15 @@ const SelectCategory = ({handleEditChange, field, token}) => {
     if (categories) {
         return(
         <select className="form-control" name="category_id" onChange={(e)=>{handleEditChange(e)}}>
-            <option value={field.category_id}>{field.category}</option>
-            {categories.map((category, index) => <option key={index} value={category.id}>{category.name}</option>)}
+            <option value={field.category_id} >{field.category}</option>
+            {categories.map((category, index) => <option key={index} value={category.id} >{category.name}</option>)}
         </select>
         )
     }
     return (
         
         <select name="name" onChange={(e)=>{handleEditChange(e)}}>
-            <option value={field.category_id}>{field.name}</option>
+            <option value={field.id}>{field.category}</option>
             
         </select>
         

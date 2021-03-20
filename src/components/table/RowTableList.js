@@ -20,6 +20,15 @@ const RowTableList = ({list, handleReload})=>{
     user_id: list.user_id
   })
 
+  const handleEditChange = (e) => {
+    console.log(e.target.name);
+		setField({
+			...field,
+			[e.target.name]: e.target.value			
+		});	
+    console.log(field);
+	}
+
   const handleDelete = (e) => {
     e.preventDefault()		   
     
@@ -60,14 +69,7 @@ const RowTableList = ({list, handleReload})=>{
     deleteAccounting ();
   }
 
-  const handleEditChange = (e) => {
-    console.log(e.target.name);
-		setField({
-			...field,
-			[e.target.name]: e.target.value			
-		});	
-    console.log(field);
-	}
+  
 
   const handleEdit = async (e) => {
 		e.preventDefault();			

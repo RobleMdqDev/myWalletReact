@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import { Tab, Tabs } from 'react-bootstrap';
+import { Container, Tab, Tabs } from 'react-bootstrap';
 import axios from 'axios';
 import './home.css';
 
 import TableList from '../table/TableList';
 import Swal from 'sweetalert2';
+import BalanceSheet from '../balancesheet/BalanceSheet';
 
 
  
@@ -53,29 +54,31 @@ export default function Home (props) {
 		},[key, reload])	
 	
 		return (
-				<>
-				
-						<h1>HOME</h1>
-							
-											
-								<Tabs 
-									id="controlled-tab-example"
-									activeKey={key}
-									onSelect={(e) => handleTabs(e)}
-								>
-									<Tab eventKey="DEBIT" title="DEBIT">
-									<TableList tableList={tableList} handleReloadHome={handleReloadHome}/>								
-								</Tab>
-								<Tab eventKey="CREDIT" title="CREDIT">
-									<TableList tableList={tableList} handleReloadHome={handleReloadHome}/>
-								
-								</Tab>
-								
-							</Tabs>
-										
-					
-							
-				</>
-			)
+      <>
+        <h1>HOME</h1>
+        <Container fluid className="home">
+          <BalanceSheet className="balance"/>
+
+          <Tabs
+		  	col={3}
+            id='controlled-tab-example'
+            activeKey={key}
+            onSelect={(e) => handleTabs(e)}>
+            <Tab eventKey='DEBIT' title='Expenses'>
+              <TableList
+                tableList={tableList}
+                handleReloadHome={handleReloadHome}
+              />
+            </Tab>
+            <Tab eventKey='CREDIT' title='Income'>
+              <TableList
+                tableList={tableList}
+                handleReloadHome={handleReloadHome}
+              />
+            </Tab>
+          </Tabs>
+        </Container>
+      </>
+    );
 }
 

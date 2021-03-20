@@ -3,3 +3,8 @@ input {
     border: none;
     color: whitesmoke;
 }
+
+.balance {
+    display: block;
+    margin: 0 auto;
+}
